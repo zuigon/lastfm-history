@@ -100,7 +100,7 @@ def get_tracks(opts={})
       data["recenttracks"].first["track"].each{|t|
         tracks << to_track(t)
         @got+=1
-        debug "Got: #{tracks_to_s [to_track t]}"
+        debug "Got: #{tracks_to_s [to_track(t)]}"
       }
     end
   end
@@ -135,7 +135,7 @@ if __FILE__ == $0
       end
       debug "from: #{s.to_i} (#{s})"
       tracks = get_tracks :to => s.to_i,
-        :limit => (ARGV[2].is_num? ? ARGV[2] : 10)
+        :limit => ((ARGV[2] && ARGV[2].is_num?) ? ARGV[2] : 10)
     elsif ARGV[0] == "range" && ARGV[1] && ARGV[2]
       tracks = get_tracks :from => ARGV[1], :to => ARGV[2], :limit => 50
     end
